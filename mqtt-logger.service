@@ -1,0 +1,22 @@
+[Unit]
+Description=MQTT Logger Service
+After=network.target mosquitto.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=federico
+Group=federico
+WorkingDirectory=/home/federico/facultad/iot/mqtt-to-mysql
+ExecStart=/home/federico/facultad/iot/mqtt-to-mysql/venv/bin/python /home/federico/facultad/iot/mqtt-to-mysql/script.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
